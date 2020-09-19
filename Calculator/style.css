@@ -5,6 +5,7 @@
 body {
   display: flex;
   justify-content: center;
+  font-family: 'Anton', sans-serif;
 }
 
 .app-container {
@@ -26,6 +27,11 @@ body {
   color: antiquewhite;
   margin-right: 1rem;
   font-size: 3rem;
+}
+
+.btn-container {
+  width: 100%;
+  height: 100%;
 }
 
 .btn {
