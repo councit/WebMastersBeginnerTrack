@@ -1,19 +1,50 @@
-var favoriteBooks = [];
-
-function addFavoriteBook(bookTitle) {
-  if (!bookTitle.includes('Great')) {
-    favoriteBooks.push(bookTitle);
+class Bookshelf {
+  constructor() {
+    this.favoriteBooks = [];
   }
+
+  addFavoriteBook(bookName) {
+    if (!bookName.includes('Great')) {
+      this.favoriteBooks.push(bookName);
+    }
+  }
+  printFavoriteBooks() {
+    console.log(`Favorite Books: ${String(this.favoriteBooks.length)}`);
+    for (let bookName of this.favoriteBooks) {
+      console.log(bookName);
+    }
+  }
+
+  // TODO: define methods `addFavoriteBook(..)`
+  // and `printFavoriteBooks()`
 }
 
-function printBooks() {
-  console.log(favoriteBooks);
+function loadBooks(BookShelf) {
+  fakeAjax(BOOK_API, function onBooks(bookNames) {
+    for (let bookName of bookNames) {
+      BookShelf.addFavoriteBook(bookName);
+    }
+    BookShelf.printFavoriteBooks();
+  });
 }
 
-addFavoriteBook('A Song of Ice and Fire');
-addFavoriteBook('The Great Gatsby');
-addFavoriteBook('Crime & Punishment');
-addFavoriteBook('Great Expectations');
-addFavoriteBook("You Don't Know JS");
+var BOOK_API = 'https://some.url/api';
 
-printBooks();
+// ***********************
+
+// NOTE: don't modify this function at all
+function fakeAjax(url, cb) {
+  setTimeout(function fakeLoadingDelay() {
+    cb([
+      'A Song of Ice and Fire',
+      'The Great Gatsby',
+      'Crime & Punishment',
+      'Great Expectations',
+      "You Don't Know JS",
+    ]);
+  }, 500);
+}
+
+var myBookShelf = new Bookshelf();
+
+loadBooks(myBookShelf);
